@@ -28,12 +28,12 @@ export default function AddColorForm({ onNewColor = f => f }) {
 */
 
 export default function AddColorForm({ onNewColor = f => f }) {
-    const [title, setTitle] = useState('')
-    const [color, setColor] = userState('#000000')
+    const [titleProps, resetTitle] = useInput('')
+    const [colorProps, resetColor] = useInput('#000000')
 
     const submit = e => {
         e.preventDefault()
-        onNewColor(title, color)
+        onNewColor(titleProps.value, colorProps.value )
         resetTitle("")
         resetColor("")
     }
@@ -41,15 +41,13 @@ export default function AddColorForm({ onNewColor = f => f }) {
     return (
         <form onSubmit={submit}>
             <input
-                value={title}
-                onChange={e => setTitle(e.target.value)}
+                {...titleProps}
                 type="text"
                 placeholder="Enter title"
                 required
             />
             <input
-                value={color}
-                onChange={e => setColor(e.target.value)}
+                {...colorProps}
                 type="color"
                 required
             />
