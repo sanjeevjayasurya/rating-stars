@@ -1,5 +1,5 @@
-import React from 'react'
-import { useInput } from './hooks'
+
+
 /*
 import React, { useRef } from 'react'
 // Uncontrolled component type of forms
@@ -28,13 +28,20 @@ export default function AddColorForm({ onNewColor = f => f }) {
 
 */
 
-export default function AddColorForm({ onNewColor = f => f }) {
+/* 
+ *
+ *  Using custom hooks
+ * */
+import React from 'react'
+import { useColors } from './ColorProvider'
+import { useInput } from './hooks'
+export default function AddColorForm() {
     const [titleProps, resetTitle] = useInput('')
     const [colorProps, resetColor] = useInput('#000000')
-
+    const { addColor } = useColors()
     const submit = e => {
         e.preventDefault()
-        onNewColor(titleProps.value, colorProps.value)
+        addColor(titleProps.value, colorProps.value)
         resetTitle("")
         resetColor("")
     }
@@ -56,3 +63,5 @@ export default function AddColorForm({ onNewColor = f => f }) {
         </form>
     )
 }
+
+
